@@ -1,28 +1,24 @@
 const page = window.location.pathname;
 
-if (page.includes("index.html")) {
+if (page.includes("index.html") || page == '/') {
   const form = document.querySelector("form");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const amount = document.querySelector("#questionCount").value;
     const category = document.querySelector("#questionCategory").value;
     const difficulty = document.querySelector("#questionDifficulty").value;
-
     const settings = { amount, category, difficulty };
     localStorage.setItem("quiz_settings", JSON.stringify(settings));
 
-    window.open(
-      "quiz.html",
-      "QuizWindow",
-      "width=800,height=600,resizable=yes,scrollbars=yes"
-    );
+  window.location.href = "./quiz.html";
+
   });
 }
 
 
 if (page.includes("quiz.html")) {
+
   const settings = JSON.parse(localStorage.getItem("quiz_settings"));
   const { amount, category, difficulty } = settings;
 
